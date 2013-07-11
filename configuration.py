@@ -18,6 +18,8 @@ settings = {
     "recipient_email": 'recipient@yourdomain.com',
     "monitor_email": 'monitor@yourdomain.com',
     "monitor_password": 'monitor email password',
+
+    # Leave as it is to use gmail as the server
     "monitor_server": 'smtp.gmail.com',
     "monitor_server_port": 587,
 
