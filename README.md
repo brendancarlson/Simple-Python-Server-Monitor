@@ -1,4 +1,4 @@
-Simple-Python-Server-Monitor
+Simple Python Server Monitor
 ============================
 
 Super simple Python based server ping monitor. Emails you with a gmail address if server is down.
