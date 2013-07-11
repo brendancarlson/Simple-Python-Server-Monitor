@@ -28,11 +28,11 @@ session.ehlo
 session.login(monitor_email, monitor_pwd)
 response = os.system("ping -c 1 " + hostname)
 
-if response == 0: #if down, send an email
+if response == 0: #if up, do nothing.
+	session.quit()
+else: #if down, send an email.
 	body = hostname + " " + "is down at" + " " + st	
 	session.sendmail(sender, recipient, headers + "\r\n\r\n" + body)
-	session.quit()
-else: #do nothing
 	session.quit()
   
 
