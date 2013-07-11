@@ -10,20 +10,20 @@ Open the configuration.py file with your favorite text editor.
 
 1. Add the IP address or hostname of the server you would like to monitor.
 
-    "hostname": '8.8.8.8', # Put your server in place of the 8.8.8.8 (Keep the quotation marks)
+        "hostname": '8.8.8.8', # Put your server in place of the 8.8.8.8 (Keep the quotation marks)
 
-2.Add the hostname or ip address and the recipient email
+2. Add the hostname or ip address and the recipient email
 
-    "recipient_email": 'recipient@yourdomain.com', # The email that the alerts will be sent to
+        "recipient_email": 'recipient@yourdomain.com', # The email that the alerts will be sent to
 
 
 3. Add the Gmail address you would like to send the email from when your server goes down.
 
-    "monitor_email": 'your_gmail_username@gmail.com',
+        "monitor_email": 'your_gmail_username@gmail.com',
 
 4. Add the Gmail password that is associated with the above Gmail email address
 
-    "monitor_password": 'gmail password',
+        "monitor_password": 'gmail password',
 
 5. Add script to crontab to run every x amount of minutes you would like to run it.
 
@@ -35,28 +35,28 @@ Open the configuration.py file with your favorite text editor.
 
 1. Add the IP address or hostname of the server you would like to monitor.
 
-    "hostname": '8.8.8.8', # Put your server in place of the 8.8.8.8 (Keep the quotation marks)
+        "hostname": '8.8.8.8', # Put your server in place of the 8.8.8.8 (Keep the quotation marks)
 
-2.Add the hostname or ip address and the recipient email
+2. Add the hostname or ip address and the recipient email
 
-    "recipient_email": 'recipient@yourdomain.com', # The email that the alerts will be sent to
+        "recipient_email": 'recipient@yourdomain.com', # The email that the alerts will be sent to
 
 
 3. Add the email address you would like to send the email from when your server goes down.
 
-    "monitor_email": 'your_gmail_username@yourdomain.com',
+        "monitor_email": 'your_gmail_username@yourdomain.com',
 
 4. Add the email password that is associated with the above email address
 
-    "monitor_password": 'email password',
+        "monitor_password": 'email password',
 
 5. Set the email server (smtp) address to send the emails from
 
-    "monitor_server": 'smtp.yourdomain.com',
+        "monitor_server": 'smtp.yourdomain.com',
 
 6. Set the email server port
 
-    "monitor_server_port": 587,
+        "monitor_server_port": 587,
 
 5. Add script to crontab to run every x amount of minutes you would like to run it.
 
