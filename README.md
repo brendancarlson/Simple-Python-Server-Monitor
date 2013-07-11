@@ -1,9 +1,9 @@
 Simple-Python-Server-Monitor
 ============================
-
 Super simple Python based server ping monitor. Emails you with a gmail address if server is down.
-
 ============================
+
+Open the myconfig.py file with your favorite text editor.
 
 1. Add the IP address or hostname of the server you would like to monitor.
   hostname = '8.8.8.8'  #your servers hostname or IP address
