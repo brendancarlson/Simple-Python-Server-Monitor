@@ -1,4 +1,4 @@
-# myconfig.py:
+# configuration.py:
 
 hostname = '8.8.8.8'  #your servers hostname or IP address
 recipient_email = 'recipient@yourdomain.com' #receiving email address (to)

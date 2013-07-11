@@ -24,15 +24,15 @@ headers = "\r\n".join(headers)
 session = smtplib.SMTP(server, port)
 session.ehlo()
 session.starttls()
-session.ehlo
+session.ehlo()
 session.login(monitor_email, monitor_pwd)
 response = os.system("ping -c 1 " + hostname)
 
 # If the site is up, do noting
 if response == 0: 
-	session.quit()
+    session.quit()
 else:
     # If the site is down, send the email
-	body = hostname + " " + "is down at" + " " + st	
-	session.sendmail(sender, recipient, headers + "\r\n\r\n" + body)
-	session.quit()
+    body = hostname + " " + "is down at" + " " + st
+    session.sendmail(sender, recipient, headers + "\r\n\r\n" + body)
+    session.quit()
