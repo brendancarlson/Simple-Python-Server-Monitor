@@ -4,7 +4,7 @@ import smtplib
 import os
 import time
 import datetime
-from myconfig import *
+from configuration import *
 
 server = 'smtp.gmail.com'
 port = 587
@@ -28,11 +28,11 @@ session.ehlo
 session.login(monitor_email, monitor_pwd)
 response = os.system("ping -c 1 " + hostname)
 
-if response == 0: #if up, do nothing.
+# If the site is up, do noting
+if response == 0: 
 	session.quit()
-else: #if down, send an email.
+else:
+    # If the site is down, send the email
 	body = hostname + " " + "is down at" + " " + st	
 	session.sendmail(sender, recipient, headers + "\r\n\r\n" + body)
 	session.quit()
-  
-
