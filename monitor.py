@@ -59,12 +59,14 @@ if response == 0:
     # If the site is up, check if the site was previously down
     if not uptime_logger.was_up():
         # The site went from down to up
+        uptime_logger.mark_up()
         body = "%s went back up at %s" % (settings["hostname"], st)
         session.sendmail(sender, recipient, headers + "\r\n\r\n" + body)
 
 else:
     # If the site was not previously down, send the email
     if uptime_logger.was_up():
+        uptime_logger.mark_down()
         body = "%s went down at %s" % (settings["hostname"], st)
         session.sendmail(sender, recipient, headers + "\r\n\r\n" + body)
 
