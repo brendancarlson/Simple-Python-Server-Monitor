@@ -56,11 +56,16 @@ class UptimeLogger(object):
         site_list = open(self.file_location, 'r')
         down_sites = site_list.readlines()
         site_list.close()
-        # Remove the hostname
-        down_sites.remove(self.hostname + '\n')
+
+        new_sites_list = []
+        for site in down_sites:
+            # Check for the site and remove it if found
+            if site.strip() == self.hostname:
+                continue
+            new_sites_list.append(site)
         # Write the new list
         site_list = open(self.file_location, 'w')
-        site_list.writelines(down_sites)
+        site_list.writelines(new_sites_list)
         site_list.close()
 
 
@@ -87,6 +92,7 @@ class UptimeChecker(object):
 
             if not uptime_logger.was_up():
                 # The site went from down to up
+                print "Site %s went back up" % self.hostname
                 self.did_change = True
                 uptime_logger.mark_up()
         else:
@@ -112,10 +118,10 @@ headers = ["From: " + sender,
            "Content-Type: text/html"]
 headers = "\r\n".join(headers)
 session = smtplib.SMTP(settings["monitor_server"], settings["monitor_server_port"])
-#session.ehlo()
-#session.starttls()
-#session.ehlo()
-#session.login(settings["monitor_email"], settings["monitor_password"])
+session.ehlo()
+session.starttls()
+session.ehlo()
+session.login(settings["monitor_email"], settings["monitor_password"])
 
 
 for site in sites:
