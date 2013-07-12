@@ -43,7 +43,7 @@ class UptimeLogger(object):
         if not self.was_up():
             return
         site_list = open(self.file_location, 'a')
-        site_list.write(self.hostname)
+        site_list.write(self.hostname + "\n")
         site_list.close()
 
     def mark_up(self):
