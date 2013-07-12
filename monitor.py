@@ -20,19 +20,20 @@ class UptimeLogger(object):
         """
         Checks if the site was up last time. Returns a boolean
         """
-        return os.path.exists(self.file_location)
+        return not os.path.exists(self.file_location)
 
     def mark_down(self):
         """
         Mark the site as down
         """
-        open(self.file_location).close()
+        open(self.file_location, 'w+').close()
 
     def mark_up(self):
         """
         Mark the site as up
         """
-        os.remove(self.file_location)
+        if os.path.exists(self.file_location):
+            os.remove(self.file_location)
 
 ts = time.time()
 st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
@@ -50,6 +51,7 @@ headers = "\r\n".join(headers)
 session = smtplib.SMTP(settings["monitor_server"], settings["monitor_server_port"])
 session.ehlo()
 session.starttls()
+session.ehlo()
 session.login(settings["monitor_email"], settings["monitor_password"])
 response = os.system("ping -c 1 " + settings["hostname"])
 
