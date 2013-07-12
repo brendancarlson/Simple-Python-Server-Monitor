@@ -13,8 +13,12 @@ Optional Settings:
     email_subject       - The subject of the email to send
 
 """
+sites = (
+    '8.8.8.8',
+    '8.8.4.4',
+)
+
 settings = {
-    "hostname": '8.8.8.8',
     "recipient_email": 'recipient@yourdomain.com',
     "monitor_email": 'monitor@yourdomain.com',
     "monitor_password": 'monitor email password',
