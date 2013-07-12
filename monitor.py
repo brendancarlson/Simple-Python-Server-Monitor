@@ -2,9 +2,60 @@
 
 import smtplib
 import os
+import subprocess
 import time
 import datetime
 from configuration import settings, sites
+from sys import platform as system_platform
+
+
+class Color(object):
+    """
+    Colorize strings in terminal
+    """
+    RED = '\033[31m'
+    GREEN = '\033[32m'
+    YELLOW = '\033[33m'
+    BLUE = '\033[34m'
+    RESET = '\033[0m'
+
+    def __init__(self):
+        # Check if the system is windows, as ANSI escape codes do not work there
+        self.should_colorize = True
+        if system_platform == "win32":
+            self.should_colorize = False
+
+    def red(self, string):
+        """
+        Turns a string red
+        """
+        if not self.should_colorize:
+            return string
+        return "%s%s%s" % (self.RED, string, self.RESET)
+
+    def green(self, string):
+        """
+        Turns a string green
+        """
+        if not self.should_colorize:
+            return string
+        return "%s%s%s" % (self.GREEN, string, self.RESET)
+
+    def blue(self, string):
+        """
+        Turns a string blue
+        """
+        if not self.should_colorize:
+            return string
+        return "%s%s%s" % (self.BLUE, string, self.RESET)
+
+    def yellow(self, string):
+        """
+        Turns a string yellow
+        """
+        if not self.should_colorize:
+            return string
+        return "%s%s%s" % (self.YELLOW, string, self.RESET)
 
 
 class UptimeLogger(object):
@@ -82,26 +133,40 @@ class UptimeChecker(object):
         """
         Checks if the site is up and sets the class variables did_change and is_up
         """
-        response = os.system("ping -c 1 " + self.hostname)
+        process = subprocess.Popen(
+            'ping -c 1 ' + self.hostname,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True
+        )
+        process.wait()
         uptime_logger = UptimeLogger(self.hostname)
 
         self.did_change = False
-        if response == 0:
+        color = Color()
+        if process.returncode == 0:
             # If the site is up, check if the site was previously down
             self.is_up = True
 
-            if not uptime_logger.was_up():
+            if uptime_logger.was_up():
+                # The site is still up
+                print color.blue("Site %s is still up" % self.hostname)
+            else:
                 # The site went from down to up
-                print "Site %s went back up" % self.hostname
+                print color.green("Site %s went back up" % self.hostname)
                 self.did_change = True
                 uptime_logger.mark_up()
         else:
             # If the site was not previously down, send the email
             self.is_up = False
             if uptime_logger.was_up():
-                print "Site %s went down" % self.hostname
+                # Site went down
+                print color.red("Site %s went down" % self.hostname)
                 self.did_change = True
                 uptime_logger.mark_down()
+            else:
+                # Site is still down
+                print color.yellow("Site %s is still down" % self.hostname)
         return self.is_up
 
 ts = time.time()
