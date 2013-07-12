@@ -183,10 +183,10 @@ headers = ["From: " + sender,
            "Content-Type: text/html"]
 headers = "\r\n".join(headers)
 session = smtplib.SMTP(settings["monitor_server"], settings["monitor_server_port"])
-#session.ehlo()
-#session.starttls()
-#session.ehlo()
-#session.login(settings["monitor_email"], settings["monitor_password"])
+session.ehlo()
+session.starttls()
+session.ehlo()
+session.login(settings["monitor_email"], settings["monitor_password"])
 
 
 for site in sites:
