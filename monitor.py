@@ -20,7 +20,7 @@ class Color(object):
     RESET = '\033[0m'
 
     def __init__(self):
-        # Check if the system is windows, as ASCII escape codes do not work there
+        # Check if the system is windows, as ANSI escape codes do not work there
         self.should_colorize = True
         if system_platform == "win32":
             self.should_colorize = False
